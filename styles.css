@@ -1,0 +1,99 @@
+:root {
+    --text-color: #000000;
+    --background-color: #ffffff;
+    --surface-color: #ececec;
+    --accent-color: #b22323;
+}
+
+html {
+    font: 500 16px "Montserrat", sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+    width: min(100%, 800px);
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+:focus {
+    outline: none;
+    filter: brightness(1.1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input,
+textarea,
+select {
+    height: 2.5em;
+    padding: 0 0.5em;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    font: inherit;
+}
+
+button {
+    height: 2.5em;
+    padding: 0 1em;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    font: inherit;
+    transition: 50ms ease;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+.thumbnail {
+    width: 100%;
+    border-radius: 8px;
+    background-color: var(--surface-color);
+}
+
+#download {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #ffffff;
+        --background-color: #151515;
+        --surface-color: #202020;
+    }
+}
