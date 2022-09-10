@@ -56,6 +56,7 @@ input,
 textarea,
 select {
     height: 2.5em;
+    margin: 0;
     padding: 0 0.5em;
     border: none;
     border-radius: 8px;
@@ -66,6 +67,7 @@ select {
 
 button {
     height: 2.5em;
+    margin: 0;
     padding: 0 1em;
     border: none;
     border-radius: 8px;
