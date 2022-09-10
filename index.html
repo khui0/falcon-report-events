@@ -18,14 +18,37 @@
     <h1>Falcon Report Events</h1>
     <canvas id="output"></canvas>
     <a href="https://github.com/khui0/falcon-report-events" target="_blank">GitHub</a>
-    <p>Dropdown</p>
+    <p>Panel count</p>
     <select id="visibility">
-        <option value="0" selected>0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3" selected>4</option>
     </select>
-    <p>Text input</p>
-    <input type="text" placeholder="Text" id="subtitle">
+    <div data-options="0">
+        <p>Panel 1</p>
+        <input type="text" placeholder="Date and time line 1" data-line-1="0">
+        <input type="text" placeholder="Date and time line 2" data-line-2="0">
+        <input type="text" placeholder="Event title" data-main="0">
+    </div>
+    <div data-options="1">
+        <p>Panel 2</p>
+        <input type="text" placeholder="Date and time line 1" data-line-1="1">
+        <input type="text" placeholder="Date and time line 2" data-line-2="1">
+        <input type="text" placeholder="Event title" data-main="1">
+    </div>
+    <div data-options="2">
+        <p>Panel 3</p>
+        <input type="text" placeholder="Date and time line 1" data-line-1="2">
+        <input type="text" placeholder="Date and time line 2" data-line-2="2">
+        <input type="text" placeholder="Event title" data-main="2">
+    </div>
+    <div data-options="3">
+        <p>Panel 4</p>
+        <input type="text" placeholder="Date and time line 1" data-line-1="3">
+        <input type="text" placeholder="Date and time line 2" data-line-2="3">
+        <input type="text" placeholder="Event title" data-main="3">
+    </div>
     <button id="download">Download</button>
     <script src="main.js"></script>
 </body>
