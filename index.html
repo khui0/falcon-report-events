@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falcon Report Thumbnail</title>
+    <title>Falcon Report Events</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,27 +15,17 @@
 </head>
 
 <body>
-    <h1>Falcon Report Thumbnail</h1>
-    <canvas id="thumbnail" class="thumbnail"></canvas>
-    <a href="https://github.com/khui0/falcon-report-thumbnail" target="_blank">GitHub</a>
-    <p>Text size (fraction of image height)</p>
-    <select id="text-size">
-        <option value="6">1/6</option>
-        <option value="7">1/7</option>
-        <option value="8" selected>1/8</option>
-        <option value="9">1/9</option>
-        <option value="10">1/10</option>
-    </select>
-    <p>Text visibility</p>
+    <h1>Falcon Report Events</h1>
+    <canvas id="output"></canvas>
+    <a href="https://github.com/khui0/falcon-report-events" target="_blank">GitHub</a>
+    <p>Dropdown</p>
     <select id="visibility">
-        <option value="0" selected>Date only</option>
-        <option value="1">Subtitle only</option>
-        <option value="2">Both</option>
+        <option value="0" selected>0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
     </select>
-    <p>Subtitle</p>
-    <input type="text" placeholder="Subtitle" id="subtitle">
-    <p>Date</p>
-    <input type="date" id="date">
+    <p>Text input</p>
+    <input type="text" placeholder="Text" id="subtitle">
     <button id="download">Download</button>
     <script src="main.js"></script>
 </body>

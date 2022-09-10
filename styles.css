@@ -79,7 +79,7 @@ button:hover {
     filter: brightness(1.1);
 }
 
-.thumbnail {
+#output {
     width: 100%;
     border-radius: 8px;
     background-color: var(--surface-color);
