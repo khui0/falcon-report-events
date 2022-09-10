@@ -96,4 +96,8 @@ button:hover {
         --background-color: #151515;
         --surface-color: #202020;
     }
+
+    input {
+        color-scheme: dark;
+    }
 }
