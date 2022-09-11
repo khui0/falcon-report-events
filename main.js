@@ -51,7 +51,7 @@ function update() {
 
     // Draw title
     ctx.font = `${(h / 7.5)}px Title`;
-    ctx.extrudedText("Upcoming Events", w * 0.5, h * 0.1, h / 70);
+    extrudedText(ctx, "Upcoming Events", w * 0.5, h * 0.1, h / 70);
 
     // Draw panels to a temporary canvas
     drawPanels(30, h * 0.2, 185, 4);
@@ -65,9 +65,52 @@ function update() {
     output.getContext("2d").drawImage(output.offscreen, 0, 0);
 }
 
+function extrudedText(ctx, string, x, y, depth) {
+    let startX = x + depth;
+    let startY = y + depth;
+    for (let i = 1; i < depth; i++) {
+        if (i == 1) {
+            ctx.shadowColor = "rgba(0, 0, 10, 1)";
+            ctx.shadowBlur = 30;
+            ctx.shadowOffsetX = 5;
+            ctx.shadowOffsetY = 5;
+        }
+        ctx.fillStyle = "rgb(30, 30, 30)";
+        ctx.fillText(string, startX - i, startY - i);
+        ctx.shadowColor = "transparent";
+    }
+    ctx.fillStyle = "white";
+    ctx.fillText(string, x, y);
+}
+
+function drawPanel(ctx, x, y, w, h, depth) {
+    let startX = x + depth;
+    let startY = y + depth;
+    for (let i = 1; i < depth; i++) {
+        ctx.fillStyle = "rgba(99, 18, 19)";
+        roundRect(ctx, startX - i, startY - i, w, h, 30).fill();
+    }
+    ctx.fillStyle = "rgba(116, 22, 22)";
+    roundRect(ctx, x, y, w, h, 30).fill();
+    return ctx;
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+    if (w < 2 * r) r = w / 2;
+    if (h < 2 * r) r = h / 2;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+    return ctx;
+}
+
 function drawPanels(margin, top, height, count) {
     for (let i = 0; i < count; i++) {
-        temp.drawPanel(margin, top + i * (height + margin), w - 2 * margin, height, 10);
+        drawPanel(temp, margin, top + i * (height + margin), w - 2 * margin, height, 10);
     }
 }
 
@@ -76,47 +119,4 @@ function downloadImage() {
     link.download = `fr-events.png`;
     link.href = output.toDataURL();
     link.click();
-}
-
-CanvasRenderingContext2D.prototype.extrudedText = function (string, x, y, depth) {
-    let startX = x + depth;
-    let startY = y + depth;
-    for (let i = 1; i < depth; i++) {
-        if (i == 1) {
-            this.shadowColor = "rgba(0, 0, 10, 1)";
-            this.shadowBlur = 30;
-            this.shadowOffsetX = 5;
-            this.shadowOffsetY = 5;
-        }
-        this.fillStyle = "rgb(30, 30, 30)";
-        this.fillText(string, startX - i, startY - i);
-        this.shadowColor = "transparent";
-    }
-    this.fillStyle = "white";
-    this.fillText(string, x, y);
-}
-
-CanvasRenderingContext2D.prototype.drawPanel = function (x, y, w, h, depth) {
-    let startX = x + depth;
-    let startY = y + depth;
-    for (let i = 1; i < depth; i++) {
-        this.fillStyle = "rgba(99, 18, 19)";
-        this.roundRect(startX - i, startY - i, w, h, 30).fill();
-    }
-    this.fillStyle = "rgba(116, 22, 22)";
-    this.roundRect(x, y, w, h, 30).fill();
-    return this;
-}
-
-CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
-    if (w < 2 * r) r = w / 2;
-    if (h < 2 * r) r = h / 2;
-    this.beginPath();
-    this.moveTo(x + r, y);
-    this.arcTo(x + w, y, x + w, y + h, r);
-    this.arcTo(x + w, y + h, x, y + h, r);
-    this.arcTo(x, y + h, x, y, r);
-    this.arcTo(x, y, x + w, y, r);
-    this.closePath();
-    return this;
 }
