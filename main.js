@@ -66,42 +66,24 @@ function update() {
 
     // Draw panels to a temporary canvas
     let height = (h - (h * 0.2) - (30 * 4)) / 4;
-    drawPanels(30, h * 0.2, height, parseInt(panelCount.value) + 1);
+    drawPanels(temp, 30, h * 0.2, height, parseInt(panelCount.value) + 1);
 
     // Set opacity and draw to main canvas
     ctx.globalAlpha = 0.5;
     ctx.drawImage(output.temp, 0, 0);
     ctx.globalAlpha = 1;
 
-    ctx.textAlign = "left";
-    ctx.font = `${(h / 16)}px Subtitle`;
-    extrudedText(ctx, "Today", 55, 275, h / 70);
-    extrudedText(ctx, "After School", 55, 355, h / 70);
-
-    ctx.textAlign = "center";
-    ctx.font = `${(h / 12)}px Subtitle`;
-    extrudedText(ctx, "Event Title", 1100, 310, h / 70);
+    drawText(getData(), ctx, 30, h * 0.2, height, parseInt(panelCount.value) + 1);
 
     // Draw offscreen canvas to onscreen canvas
     output.getContext("2d").drawImage(output.offscreen, 0, 0);
 }
 
-function extrudedText(ctx, string, x, y, depth) {
-    let startX = x + depth;
-    let startY = y + depth;
-    for (let i = 1; i < depth; i++) {
-        if (i == 1) {
-            ctx.shadowColor = "rgba(0, 0, 10, 1)";
-            ctx.shadowBlur = 30;
-            ctx.shadowOffsetX = 5;
-            ctx.shadowOffsetY = 5;
-        }
-        ctx.fillStyle = "rgb(30, 30, 30)";
-        ctx.fillText(string, startX - i, startY - i);
-        ctx.shadowColor = "transparent";
+function drawPanels(ctx, margin, top, height, count) {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < count; i++) {
+        drawPanel(ctx, margin, top + i * (height + margin), w - 2 * margin, height, 10);
     }
-    ctx.fillStyle = "white";
-    ctx.fillText(string, x, y);
 }
 
 function drawPanel(ctx, x, y, w, h, depth) {
@@ -129,11 +111,53 @@ function roundRect(ctx, x, y, w, h, r) {
     return ctx;
 }
 
-function drawPanels(margin, top, height, count) {
-    temp.clearRect(0, 0, w, h);
+function drawText(data, ctx, margin, top, height, count) {
     for (let i = 0; i < count; i++) {
-        drawPanel(temp, margin, top + i * (height + margin), w - 2 * margin, height, 10);
+        let left = margin + margin / 1.2;
+        let middle = top + i * (height + margin) + height / 2;
+
+        // Draw date and time text
+        ctx.textAlign = "left";
+        ctx.font = `${(h / 18)}px Subtitle`;
+        extrudedText(ctx, data[i].line1, left, middle - height / 4.5, h / 70);
+        extrudedText(ctx, data[i].line2, left, middle + height / 4.5, h / 70);
+
+        // Draw event title
+        ctx.textAlign = "center";
+        ctx.font = `${(h / 12)}px Subtitle`;
+        extrudedText(ctx, data[i].main, w * 0.575, middle, h / 70);
     }
+}
+
+function extrudedText(ctx, string, x, y, depth) {
+    let startX = x + depth;
+    let startY = y + depth;
+    for (let i = 1; i < depth; i++) {
+        if (i == 1) {
+            ctx.shadowColor = "rgba(0, 0, 10, 1)";
+            ctx.shadowBlur = 30;
+            ctx.shadowOffsetX = 5;
+            ctx.shadowOffsetY = 5;
+        }
+        ctx.fillStyle = "rgb(30, 30, 30)";
+        ctx.fillText(string, startX - i, startY - i);
+        ctx.shadowColor = "transparent";
+    }
+    ctx.fillStyle = "white";
+    ctx.fillText(string, x, y);
+}
+
+function getData() {
+    let data = [];
+    document.querySelectorAll("[data-options]").forEach(item => {
+        let index = item.getAttribute("data-options");
+        data[index] = {
+            "line1": item.querySelector("[data-line-1]").value,
+            "line2": item.querySelector("[data-line-2]").value,
+            "main": item.querySelector("[data-main]").value
+        }
+    });
+    return data;
 }
 
 function downloadImage() {
