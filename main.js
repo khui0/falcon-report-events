@@ -16,14 +16,14 @@ output.temp.height = output.height;
 const ctx = output.offscreen.getContext("2d");
 const temp = output.temp.getContext("2d");
 
-const textSize = document.getElementById("text-size");
+const panelCount = document.getElementById("count");
 
 const backgroundImage = new Image();
 backgroundImage.src = "assets/background.png";
 
 const fontFaces = [
-    new FontFace("Title", "url(assets/LinLibertine_aBS.ttf)").load(),
-    new FontFace("Subtitle", "url(assets/Montserrat-SemiBold.ttf)").load()
+    new FontFace("Title", "url(assets/LinLibertineCapitalsB.woff2)").load(),
+    new FontFace("Subtitle", "url(assets/Montserrat-SemiBold.woff2)").load()
 ]
 
 // Load fonts
@@ -69,10 +69,6 @@ function drawPanels(margin, top, height, count) {
     for (let i = 0; i < count; i++) {
         temp.drawPanel(margin, top + i * (height + margin), w - 2 * margin, height, 10);
     }
-}
-
-function dateToString(date) {
-    return new Date(date).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
 }
 
 function downloadImage() {
