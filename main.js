@@ -66,7 +66,7 @@ function update() {
 
     // Draw panels to a temporary canvas
     let height = (h - (h * 0.2) - (30 * 4)) / 4;
-    drawPanels(30, h * 0.2, height, panelCount.value + 1);
+    drawPanels(30, h * 0.2, height, parseInt(panelCount.value) + 1);
 
     // Set opacity and draw to main canvas
     ctx.globalAlpha = 0.5;
@@ -130,6 +130,7 @@ function roundRect(ctx, x, y, w, h, r) {
 }
 
 function drawPanels(margin, top, height, count) {
+    temp.clearRect(0, 0, w, h);
     for (let i = 0; i < count; i++) {
         drawPanel(temp, margin, top + i * (height + margin), w - 2 * margin, height, 10);
     }
