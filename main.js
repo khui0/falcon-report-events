@@ -46,7 +46,7 @@ document.getElementById("count").addEventListener("input", () => {
         else {
             item.style.display = "none";
         }
-    })
+    });
 });
 
 document.getElementById("download").addEventListener("click", downloadImage);
@@ -66,18 +66,21 @@ function update() {
 
     // Draw panels to a temporary canvas
     let height = (h - (h * 0.2) - (30 * 4)) / 4;
-    drawPanels(30, h * 0.2, height, 4);
+    drawPanels(30, h * 0.2, height, panelCount.value + 1);
 
     // Set opacity and draw to main canvas
     ctx.globalAlpha = 0.5;
     ctx.drawImage(output.temp, 0, 0);
     ctx.globalAlpha = 1;
 
-    // Set text formatting
     ctx.textAlign = "left";
+    ctx.font = `${(h / 16)}px Subtitle`;
+    extrudedText(ctx, "Today", 55, 275, h / 70);
+    extrudedText(ctx, "After School", 55, 355, h / 70);
 
-    ctx.font = `${(h / 15)}px Subtitle`;
-    extrudedText(ctx, "Today", 30, 300, h / 70);
+    ctx.textAlign = "center";
+    ctx.font = `${(h / 12)}px Subtitle`;
+    extrudedText(ctx, "Event Title", 1100, 310, h / 70);
 
     // Draw offscreen canvas to onscreen canvas
     output.getContext("2d").drawImage(output.offscreen, 0, 0);
