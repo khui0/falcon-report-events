@@ -62,7 +62,7 @@ function update() {
 
     // Draw title
     ctx.font = `${(h / 7.5)}px Title`;
-    extrudedText(ctx, "Upcoming Events", w * 0.5, h * 0.1, h / 70);
+    extrudedText(ctx, "Upcoming Events", w * 0.5, h * 0.1, h / 80);
 
     // Draw panels to a temporary canvas
     let height = (h - (h * 0.2) - (30 * 4)) / 4;
@@ -119,13 +119,13 @@ function drawText(data, ctx, margin, top, height, count) {
         // Draw date and time text
         ctx.textAlign = "left";
         ctx.font = `${(h / 18)}px Subtitle`;
-        extrudedText(ctx, data[i].line1, left, middle - height / 4.5, h / 70);
-        extrudedText(ctx, data[i].line2, left, middle + height / 4.5, h / 70);
+        extrudedText(ctx, data[i].line1, left, middle - height / 4.5, h / 100);
+        extrudedText(ctx, data[i].line2, left, middle + height / 4.5, h / 100);
 
         // Draw event title
         ctx.textAlign = "center";
         ctx.font = `${(h / 12)}px Subtitle`;
-        extrudedText(ctx, data[i].main, w * 0.575, middle, h / 70);
+        extrudedText(ctx, data[i].main, w * 0.575, middle, h / 100);
     }
 }
 
