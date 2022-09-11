@@ -54,7 +54,8 @@ function update() {
     extrudedText(ctx, "Upcoming Events", w * 0.5, h * 0.1, h / 70);
 
     // Draw panels to a temporary canvas
-    drawPanels(30, h * 0.2, 185, 4);
+    let height = (h - (h * 0.2) - (30 * 4)) / 4;
+    drawPanels(30, h * 0.2, height, 4);
 
     // Set opacity and draw to main canvas
     ctx.globalAlpha = 0.5;
