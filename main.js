@@ -38,6 +38,17 @@ document.querySelectorAll("input, select").forEach(item => {
     item.addEventListener("input", update);
 });
 
+document.getElementById("count").addEventListener("input", () => {
+    document.querySelectorAll("[data-options]").forEach(item => {
+        if (item.getAttribute("data-options") <= panelCount.value) {
+            item.style.display = "flex";
+        }
+        else {
+            item.style.display = "none";
+        }
+    })
+});
+
 document.getElementById("download").addEventListener("click", downloadImage);
 
 function update() {
@@ -61,6 +72,12 @@ function update() {
     ctx.globalAlpha = 0.5;
     ctx.drawImage(output.temp, 0, 0);
     ctx.globalAlpha = 1;
+
+    // Set text formatting
+    ctx.textAlign = "left";
+
+    ctx.font = `${(h / 15)}px Subtitle`;
+    extrudedText(ctx, "Today", 30, 300, h / 70);
 
     // Draw offscreen canvas to onscreen canvas
     output.getContext("2d").drawImage(output.offscreen, 0, 0);
