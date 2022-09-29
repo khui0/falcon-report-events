@@ -119,13 +119,20 @@ function drawText(data, ctx, margin, top, height, count) {
         // Draw date and time text
         ctx.textAlign = "left";
         ctx.font = `${(h / 18)}px Subtitle`;
-        extrudedText(ctx, data[i].line1, left, middle - height / 4.5, h / 100);
-        extrudedText(ctx, data[i].line2, left, middle + height / 4.5, h / 100);
+        extrudedText(ctx, data[i].details1, left, middle - height / 4.5, h / 100);
+        extrudedText(ctx, data[i].details2, left, middle + height / 4.5, h / 100);
 
         // Draw event title
         ctx.textAlign = "center";
-        ctx.font = `${(h / 12)}px Subtitle`;
-        extrudedText(ctx, data[i].main, w * 0.575, middle, h / 100);
+        if (!data[i].title2) {
+            ctx.font = `${(h / 12)}px Subtitle`;
+            extrudedText(ctx, data[i].title1, w * 0.575, middle, h / 100);
+        }
+        else {
+            ctx.font = `${(h / 18)}px Subtitle`;
+            extrudedText(ctx, data[i].title1, w * 0.575, middle - height / 4.5, h / 100);
+            extrudedText(ctx, data[i].title2, w * 0.575, middle + height / 4.5, h / 100);
+        }
     }
 }
 
@@ -152,9 +159,10 @@ function getData() {
     document.querySelectorAll("[data-options]").forEach(item => {
         let index = item.getAttribute("data-options");
         data[index] = {
-            "line1": item.querySelector("[data-line-1]").value,
-            "line2": item.querySelector("[data-line-2]").value,
-            "main": item.querySelector("[data-main]").value
+            "details1": item.querySelector("[data-details-1]").value,
+            "details2": item.querySelector("[data-details-2]").value,
+            "title1": item.querySelector("[data-title-1]").value,
+            "title2": item.querySelector("[data-title-2]").value
         }
     });
     return data;
