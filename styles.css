@@ -1,4 +1,5 @@
 :root {
+    color-scheme: light;
     --text-color: #000000;
     --background-color: #ffffff;
     --surface-color: #ececec;
@@ -26,7 +27,8 @@ body {
 
 :focus {
     outline: none;
-    filter: brightness(1.1);
+    box-shadow: 0 0 0 2px var(--accent-color);
+    transition: 50ms ease;
 }
 
 h1,
@@ -44,6 +46,7 @@ h1 {
 }
 
 a {
+    width: fit-content;
     color: var(--accent-color);
     text-decoration: none;
 }
@@ -78,7 +81,7 @@ button {
 }
 
 button:hover {
-    filter: brightness(1.1);
+    box-shadow: 0 0 0 2px var(--accent-color);
 }
 
 [data-options] {
@@ -88,6 +91,13 @@ button:hover {
     padding: 10px;
     border: 3px solid var(--surface-color);
     border-radius: 8px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
 }
 
 #output {
@@ -103,12 +113,14 @@ button:hover {
 
 @media (prefers-color-scheme: dark) {
     :root {
+        color-scheme: dark;
         --text-color: #ffffff;
         --background-color: #151515;
         --surface-color: #202020;
     }
+}
 
-    input {
-        color-scheme: dark;
-    }
+span.material-symbols-outlined {
+    font-size: inherit;
+    line-height: inherit;
 }

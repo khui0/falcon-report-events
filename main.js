@@ -49,6 +49,17 @@ document.getElementById("count").addEventListener("input", () => {
     });
 });
 
+document.querySelectorAll("[data-swap]").forEach(item => {
+    item.addEventListener("click", () => {
+        let from = parseInt(item.getAttribute("data-swap"));
+        let to = from + 1;
+        let data = getData();
+        setData(to, data[from].details1, data[from].details2, data[from].title1, data[from].title2);
+        setData(from, data[to].details1, data[to].details2, data[to].title1, data[to].title2);
+        update();
+    });
+});
+
 document.getElementById("download").addEventListener("click", downloadImage);
 
 function update() {
@@ -166,6 +177,14 @@ function getData() {
         }
     });
     return data;
+}
+
+function setData(index, details1, details2, title1, title2) {
+    let panel = document.querySelectorAll("[data-options]")[index];
+    panel.querySelector("[data-details-1]").value = details1;
+    panel.querySelector("[data-details-2]").value = details2;
+    panel.querySelector("[data-title-1]").value = title1;
+    panel.querySelector("[data-title-2]").value = title2;
 }
 
 function downloadImage() {
