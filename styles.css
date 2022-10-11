@@ -93,13 +93,6 @@ button:hover {
     border-radius: 8px;
 }
 
-.button-container {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    align-items: center;
-}
-
 #output {
     width: 100%;
     border-radius: 8px;
